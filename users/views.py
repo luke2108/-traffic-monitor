@@ -16,7 +16,7 @@ class UserErrorViewSet(viewsets.ModelViewSet):
         queryset = UserError.objects.all()
         return queryset
     
-    def create(self, request, pk: str, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         domain = request.get_host()
         ip_address = self.get_client_ip(request)
 
