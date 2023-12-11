@@ -5,7 +5,7 @@ class UserError(models.Model):
     ip_user = models.CharField(max_length=100, null=True, blank=True)
     domain = models.CharField(max_length=500, null=True, blank=True)
     status = models.CharField(max_length=50, null=True, blank=True)
-    timestamp = models.DateTimeField(null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     class Meta:
         ordering = ["-id"]
