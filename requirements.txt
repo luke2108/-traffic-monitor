@@ -1,0 +1,12 @@
+# python django
+django
+requests
+djangorestframework
+djangorestframework-simplejwt
+python-dotenv
+drf_yasg
+requests
+django-rest-swagger
+gunicorn
+drf_yasg
+# python-rest-framework
