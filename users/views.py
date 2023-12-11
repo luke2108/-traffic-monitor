@@ -17,7 +17,7 @@ class UserErrorViewSet(viewsets.ModelViewSet):
         return queryset
     
     def create(self, request, *args, **kwargs):
-        domain = request.get_host()
+        domain = request.data.get('domain')
         ip_address = self.get_client_ip(request)
 
         user_error = UserError(
@@ -27,7 +27,6 @@ class UserErrorViewSet(viewsets.ModelViewSet):
         )
         user_error.save()
         return Response(status=status.HTTP_201_CREATED)
-
 
     def get_client_ip(self, request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
