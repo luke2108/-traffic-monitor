@@ -8,7 +8,6 @@ from django.db.models import Q
 from .models import UserError
 from .serializers import UserErrorSerializer
 
-
 class UserErrorViewSet(viewsets.ModelViewSet):
     serializer_class = UserErrorSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -16,3 +15,24 @@ class UserErrorViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = UserError.objects.all()
         return queryset
+    
+    def create(self, request, pk: str, *args, **kwargs):
+        domain = request.get_host()
+        ip_address = self.get_client_ip(request)
+
+        user_error = UserError(
+            ip_user=ip_address,
+            domain=domain,
+            status="error",
+        )
+        user_error.save()
+        return Response(status=status.HTTP_201_CREATED)
+
+
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
