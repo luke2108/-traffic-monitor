@@ -10,3 +10,4 @@ django-rest-swagger
 gunicorn
 drf_yasg
 # python-rest-framework
+django-cors-headers

@@ -19,9 +19,12 @@ class UserErrorViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         domain = request.data.get('domain')
         ip_address = self.get_client_ip(request)
+        user_agent = request.META['HTTP_USER_AGENT']
+
 
         user_error = UserError(
             ip_user=ip_address,
+            user_agent=user_agent,
             domain=domain,
             status="error",
         )
