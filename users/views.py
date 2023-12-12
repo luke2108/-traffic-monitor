@@ -18,6 +18,7 @@ class UserErrorViewSet(viewsets.ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         domain = request.data.get('domain')
+        status = request.data.get('status')
         ip_address = self.get_client_ip(request)
         user_agent = request.META['HTTP_USER_AGENT']
 
@@ -26,7 +27,7 @@ class UserErrorViewSet(viewsets.ModelViewSet):
             ip_user=ip_address,
             user_agent=user_agent,
             domain=domain,
-            status="error",
+            status=status,
         )
         user_error.save()
         return Response(status=status.HTTP_201_CREATED)
