@@ -30,7 +30,7 @@ class UserErrorViewSet(viewsets.ModelViewSet):
             status=status,
         )
         user_error.save()
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(status=201)
 
     def get_client_ip(self, request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
